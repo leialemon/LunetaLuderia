@@ -13,7 +13,7 @@ public class CriarJogoService {
         this.jogoRepository = jogoRepository;
     }
 
-    public void CriarJogo(Jogo jogo){
+    public void criarJogo(Jogo jogo){
         jogoRepository.save(jogo);
     }
 

@@ -32,4 +32,8 @@ public class BuscarJogoService {
     public List<Jogo> buscarJogosPorTitulo(String titulo){
         return jogoRepository.findByTituloContaining(titulo);
     }
+
+    public List<Jogo> mostrarTodosJogos(){
+        return jogoRepository.findAll();
+    }
 }

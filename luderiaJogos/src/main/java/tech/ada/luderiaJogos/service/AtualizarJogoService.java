@@ -16,7 +16,7 @@ public class AtualizarJogoService {
     }
 
     public void atualizarJogo(Jogo jogo){
-
+        jogoRepository.save(jogo);
     }
 
 }
