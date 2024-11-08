@@ -9,6 +9,7 @@ public class Jogo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String titulo;
 
     private Float preco;
