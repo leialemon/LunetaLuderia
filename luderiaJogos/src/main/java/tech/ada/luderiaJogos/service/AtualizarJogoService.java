@@ -1,8 +1,11 @@
 package tech.ada.luderiaJogos.service;
 
 import org.springframework.stereotype.Service;
+import tech.ada.luderiaJogos.config.JogoNaoEncontradoException;
 import tech.ada.luderiaJogos.model.Jogo;
 import tech.ada.luderiaJogos.repository.JogoRepository;
+
+import java.util.Optional;
 
 @Service
 public class AtualizarJogoService {
@@ -15,8 +18,13 @@ public class AtualizarJogoService {
         this.buscarJogoService = buscarJogoService;
     }
 
-    public void atualizarJogo(Jogo jogo){
-        jogoRepository.save(jogo);
+    public String atualizarJogo(String titulo){
+        Optional<Jogo> jogo = buscarJogoService.buscarJogoPorTituloExato(titulo);
+        if (jogo.isEmpty()){
+            throw new JogoNaoEncontradoException(titulo);
+        }
+        jogoRepository.save(jogo.get());
+        return String.format("Jogo %s atualizado com sucesso!", titulo);
     }
 
 }
