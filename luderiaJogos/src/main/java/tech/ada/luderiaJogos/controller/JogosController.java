@@ -1,7 +1,9 @@
 package tech.ada.luderiaJogos.controller;
 
 import org.springframework.web.bind.annotation.*;
+import tech.ada.luderiaJogos.config.JogoNaoEncontradoException;
 import tech.ada.luderiaJogos.model.Jogo;
+import tech.ada.luderiaJogos.model.Mecanica;
 import tech.ada.luderiaJogos.service.AtualizarJogoService;
 import tech.ada.luderiaJogos.service.BuscarJogoService;
 import tech.ada.luderiaJogos.service.CriarJogoService;
@@ -25,9 +27,24 @@ public class JogosController {
         this.deletarJogoService = deletarJogoService;
     }
 
-    @PostMapping("/criar")
+    @PostMapping()
     public void criarJogo(@RequestBody Jogo jogo){
         criarJogoService.criarJogo(jogo);
+    }
+
+    @GetMapping("/buscar/titulo")
+    public Jogo buscarJogoPorTituloExato(@RequestParam String tituloExato){
+        return buscarJogoService.buscarJogoPorTituloExato(tituloExato).orElseThrow(() -> new JogoNaoEncontradoException(tituloExato));
+    }
+
+    @GetMapping("/buscar")
+    public List<Jogo> buscarJogosPorTitulo(@RequestParam String busca){
+        return buscarJogoService.buscarJogosPorTitulo(busca);
+    }
+
+    @GetMapping("/buscar/mecanica")
+    public List<Jogo> buscarJogosPorMecanica(@RequestParam Mecanica mecanica){
+        return buscarJogoService.buscarJogosPorMecanica(mecanica);
     }
 
     @GetMapping
@@ -36,8 +53,14 @@ public class JogosController {
     }
 
     @DeleteMapping
-    public void deletarJogo(Jogo jogo){
+    public void deletarJogo(@RequestBody Jogo jogo){
         deletarJogoService.deletarJogo(jogo);
     }
+    //TODO verificar como fazer o método PUT
+//    @PutMapping
+//    public String atualizarJogo(@RequestBody String titulo){
+//        atualizarJogoService.atualizarJogo(titulo);
+//        return "Jogo atualizado com sucesso!";
+//   }
 
 }
