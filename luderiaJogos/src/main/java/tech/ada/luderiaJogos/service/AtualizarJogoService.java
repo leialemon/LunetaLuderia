@@ -19,6 +19,17 @@ public class AtualizarJogoService {
         this.buscarJogoService = buscarJogoService;
     }
 
+    public String atualizarTituloJogoPorId(Long id, String novoTitulo){
+        Optional<Jogo> jogo = buscarJogoService.buscarJogoPorId(id);
+        if (jogo.isEmpty()){
+            throw new JogoNaoEncontradoException(String.format("%d", id));
+        }
+        Jogo jogoASerAtualizado = jogo.get();
+        jogoASerAtualizado.setTitulo(novoTitulo);
+        jogoRepository.save(jogoASerAtualizado);
+        return String.format("Jogo %s atualizado com sucesso!", jogoASerAtualizado.getTitulo());
+    }
+
     public String atualizarTituloJogo(String tituloAtual, String novoTitulo){
         Optional<Jogo> jogo = buscarJogoService.buscarJogoPorTituloExato(tituloAtual);
         if (jogo.isEmpty()){

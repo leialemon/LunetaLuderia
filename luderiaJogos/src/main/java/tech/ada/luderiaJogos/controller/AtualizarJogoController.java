@@ -14,6 +14,11 @@ public class AtualizarJogoController {
         this.atualizarJogoService = atualizarJogoService;
     }
 
+    @PatchMapping("/titulo/id/{id}")
+    public String atualizarTituloJogoPorId(@PathVariable("id") Long id, @RequestBody String novoTitulo){
+        return atualizarJogoService.atualizarTituloJogoPorId(id, novoTitulo);
+    }
+
     @PatchMapping("/titulo/{tituloatual}")
     public String atualizarTituloJogo(@PathVariable("tituloaatual") String tituloAtual, @RequestBody String novoTitulo){
         return atualizarJogoService.atualizarTituloJogo(tituloAtual, novoTitulo);
