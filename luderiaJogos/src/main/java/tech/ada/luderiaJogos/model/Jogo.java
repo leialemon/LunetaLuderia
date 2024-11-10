@@ -6,13 +6,13 @@ import jakarta.persistence.*;
 public class Jogo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
     private String titulo;
 
-    private Float preco;
+    private Double preco;
 
     @Enumerated(EnumType.STRING)
     private Mecanica mecanica;
@@ -25,11 +25,19 @@ public class Jogo {
         this.titulo = titulo;
     }
 
-    public Float getPreco() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Float preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
