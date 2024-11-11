@@ -1,11 +1,10 @@
 package tech.ada.luderiaJogos.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.ada.luderiaJogos.config.JogoNaoEncontradoException;
 import tech.ada.luderiaJogos.model.Jogo;
+import tech.ada.luderiaJogos.model.JogoDto;
+import tech.ada.luderiaJogos.model.JogoMapper;
 import tech.ada.luderiaJogos.model.Mecanica;
 import tech.ada.luderiaJogos.service.BuscarJogoService;
 
@@ -16,14 +15,16 @@ import java.util.List;
 public class BuscarJogoController {
 
     private final BuscarJogoService buscarJogoService;
+    private final JogoMapper jogoMapper;
 
-    public BuscarJogoController(BuscarJogoService buscarJogoService){
+    public BuscarJogoController(BuscarJogoService buscarJogoService, JogoMapper jogoMapper){
         this.buscarJogoService = buscarJogoService;
+        this.jogoMapper = jogoMapper;
     }
 
-    @GetMapping("/titulo")
-    public Jogo buscarJogoPorTituloExato(@RequestParam String tituloExato){
-        return buscarJogoService.buscarJogoPorTituloExato(tituloExato).orElseThrow(() -> new JogoNaoEncontradoException(tituloExato));
+    @GetMapping("/{tituloexato}")
+    public JogoDto buscarJogoPorTituloExato(@PathVariable("tituloExato") String tituloExato){
+        return jogoMapper.deJogoParaDto(buscarJogoService.buscarJogoPorTituloExato(tituloExato).orElseThrow(() -> new JogoNaoEncontradoException(tituloExato)));
     }
 
     @GetMapping("/pesquisa")
