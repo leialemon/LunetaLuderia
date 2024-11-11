@@ -1,23 +1,12 @@
 package tech.ada.luderiaJogos.model;
 
-import jakarta.persistence.*;
+public class JogoDto {
 
-@Entity
-public class Jogo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
     private String titulo;
 
     private Double preco;
 
-    @Enumerated(EnumType.STRING)
-    private Mecanica mecanica;
-
-    public boolean disponivel;
+    private boolean disponivel;
 
     public boolean isDisponivel() {
         return disponivel;
@@ -35,27 +24,11 @@ public class Jogo {
         this.titulo = titulo;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Double getPreco() {
         return preco;
     }
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public Mecanica getMecanica() {
-        return mecanica;
-    }
-
-    public void setMecanica(Mecanica mecanica) {
-        this.mecanica = mecanica;
     }
 }
