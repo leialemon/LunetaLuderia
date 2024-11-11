@@ -7,3 +7,10 @@ Projeto para o Módulo Arquitetura de Software Ágil I, do curso ADA B3 inclua+.
 | Framework | Spring                      |
 | Persistência | PostgreSql               |
 
+| Serviço | Portas |
+ -------- | ------ |
+| Serviço de Gerenciamento de Jogos | 8080 |
+| Serviço de Gerenciamento de Pessoas | 8081 |
+| Serviço de Gerenciamento de Alugueis | 8082 |
+| Eureka Server | 8761 |
+| Container PostgreSQL | 5432 |
